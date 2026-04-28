@@ -5,22 +5,23 @@
             background-image: url(s.png);
         }
         
-
-
-        .sidebar {
+.sidebar {
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%
-  width: 70px;
-  background: #f5f0e8;
+  height: 100%;
+  width: 75px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border-right: 2px solid rgba(255,255,255,0.4);
   transition: 0.3s;
   overflow: hidden;
   padding-top: 20px;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
 }
 
 .sidebar:hover {
-  width: 220px;
+  width: 250px;
 }
 
 .menu-btn {
@@ -31,30 +32,27 @@
   cursor: pointer;
 }
 
-.menu-content {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
 .menu-content a {
   text-decoration: none;
-  color: black;
+  color: #333;
   padding: 15px 20px;
+  display: block;
+  font-size: 16px;
   transition: 0.2s;
 }
 
 .menu-content a:hover {
-  background: #e6ddd0;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
 }
     </style>
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haiku</title>
 </head>
 <body>
     <h1>The Haiku Hub</h1>
+    <p>Welcome to the Haiku Hub! Check out all of our reasources and tips on the side menu.</p>
     <div class="sidebar">
   <button class="menu-btn">☰ Menu</button>
 
