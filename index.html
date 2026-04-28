@@ -4,6 +4,50 @@
         body{
             background-image: url(s.png);
         }
+        
+
+
+        .sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%
+  width: 70px;
+  background: #f5f0e8;
+  transition: 0.3s;
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+.sidebar:hover {
+  width: 220px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.menu-content {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-content a {
+  text-decoration: none;
+  color: black;
+  padding: 15px 20px;
+  transition: 0.2s;
+}
+
+.menu-content a:hover {
+  background: #e6ddd0;
+  border-radius: 10px;
+}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +55,18 @@
 </head>
 <body>
     <h1>The Haiku Hub</h1>
+    <div class="sidebar">
+  <button class="menu-btn">☰ Menu</button>
+
+  <div class="menu-content">
+    <a href="#">Home</a>
+    <a href="#">Inspo page</a>
+    <a href="#">Author spotlight</a>
+    <a href="#">Write your own Haikus!</a>
+    <a href="#">Tips</a>
+        <a href="#">My favorites</a>
+  </div>
+</div>
     
 </body>
 </html>
