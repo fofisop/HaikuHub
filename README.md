@@ -1,1 +1,1 @@
-# HaikuHub
+As a huge fan of haikus and poetry in general, I wanted to create a project that would be the perfect guide to one of the easiest forms of poetry out there! I also may want to use this for my poetry club that I am running this summer. Use this by clicking on the various tabs, and trying out the different tools and things to read!

@@ -1,9 +1,24 @@
 
 <head>
     <style>
-        body{
-            background-image: url(s.png);
-        }
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-image: url(s.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
         
 .sidebar {
   position: fixed;
@@ -23,7 +38,47 @@
 .sidebar:hover {
   width: 250px;
 }
+.main-card {
+    width: calc(100% - 320px);
+    margin-left: 280px;
+    margin-top: 80px;
+    padding: 40px;
+    border-radius: 25px;
 
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(50px);
+
+    border: 2px solid rgba(255,255,255,0.4);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+
+    text-align: center;
+}
+
+.main-card h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.main-card p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.main-card button {
+    padding: 12px 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+
+    background: rgba(255,255,255,0.8);
+    transition: 0.2s;
+}
+
+.main-card button:hover {
+    transform: scale(1.05);
+}
 .menu-btn {
   background: none;
   border: none;
@@ -51,20 +106,64 @@
     <title>Haiku</title>
 </head>
 <body>
-    <h1>The Haiku Hub</h1>
-    <p>Welcome to the Haiku Hub! Check out all of our reasources and tips on the side menu.</p>
     <div class="sidebar">
   <button class="menu-btn">☰ Menu</button>
 
   <div class="menu-content">
-    <a href="#">Home</a>
-    <a href="#">Inspo page</a>
-    <a href="#">Author spotlight</a>
-    <a href="#">Write your own Haikus!</a>
-    <a href="#">Tips</a>
-        <a href="#">My favorites</a>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('inspo')">Inspo page</a>
+    <a onclick="showPage('as')">Author spotlight</a>
+    <a onclick="showPage('write')">Write your own Haikus!</a>
+    <a onclick="showPage('tip')">Tips</a>
+        <a onclick="showPage('faves')">My favorites</a>
+         <a onclick="showPage('set')">Settings</a>
   </div>
 </div>
-    
+<div class="main-card">
+<div id="home" class="page active">
+     <h1>The Haiku Hub</h1>
+    <p>Welcome to the Haiku Hub! Check out all of our reasources and tips on the side menu.</p>
+</div>
+<div id="inspo" class="page">
+  <h1>Inspo Page</h1>
+  <p>Click the button for a random haiku theme!</p>
+</div>
+<div id="as" class="page">
+  <h1>Author spotlight</h1>
+  <p>Check out these great haiku author spotlights!</p>
+</div>
+<div id="write" class="page">
+  <h1>Write your own haikus here!</h1>
+  <p>Use the text box provided to type and type... and type</p>
+</div>
+
+
+<div id="tip" class="page">
+  <h1>Tips & Tricks</h1>
+  <p>Read the page to find out some cool tricks on how to become a haiku champion!</p>
+</div>
+
+<div id="faves" class="page">
+  <h1>Some of my personal favorite haikus out there!</h1>
+  <p>Read em!</p>
+</div>
+
+
+<div id="set" class="page">
+  <h1>Settings</h1>
+  <p>Change them to your liking.</p>
+</div>
+</div>
+<script>
+function showPage(pageId) {
+  let pages = document.querySelectorAll(".page");
+
+  pages.forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(pageId).classList.add("active");
+}
+</script>
 </body>
 </html>
