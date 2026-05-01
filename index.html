@@ -9,6 +9,17 @@
 .page.active {
   display: block;
 }
+#haiku-box{
+  width: 90%; 
+  height: 250px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 15;
+  border: none;
+font-size: 16px;
+resize: none;
+background: rgba(255, 255, 255, 0.8);
+}
 
 body {
   margin: 0;
@@ -33,20 +44,20 @@ body {
   overflow: hidden;
   padding-top: 20px;
   box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
 .sidebar:hover {
   width: 250px;
 }
 .main-card {
-    width: calc(100% - 320px);
-    margin-left: 280px;
-    margin-top: 80px;
+    width: 60%;
+    margin: 80px auto;
     padding: 40px;
     border-radius: 25px;
 
     background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(12px);
 
     border: 2px solid rgba(255,255,255,0.4);
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
@@ -97,8 +108,8 @@ body {
 }
 
 .menu-content a:hover {
-  background: rgba(255,255,255,0.6);
-  border-radius: 12px;
+background: rgba(255,255,255,0.6);
+border-radius: 12px;
 }
     </style>
 
@@ -114,7 +125,7 @@ body {
     <a onclick="showPage('inspo')">Inspo page</a>
     <a onclick="showPage('as')">Author spotlight</a>
     <a onclick="showPage('write')">Write your own Haikus!</a>
-    <a onclick="showPage('tip')">Tips</a>
+    <a onclick="showPage('tip')">Tips & Tools</a>
         <a onclick="showPage('faves')">My favorites</a>
          <a onclick="showPage('set')">Settings</a>
   </div>
@@ -127,6 +138,10 @@ body {
 <div id="inspo" class="page">
   <h1>Inspo Page</h1>
   <p>Click the button for a random haiku theme!</p>
+
+  <button onclick="generateTheme()">Give me a theme</button>
+
+  <p id="theme-output"></p>
 </div>
 <div id="as" class="page">
   <h1>Author spotlight</h1>
@@ -134,13 +149,14 @@ body {
 </div>
 <div id="write" class="page">
   <h1>Write your own haikus here!</h1>
-  <p>Use the text box provided to type and type... and type</p>
+
+  <textarea id="haiku-box" placeholder="Write your haikus here..."></textarea>
 </div>
 
 
 <div id="tip" class="page">
-  <h1>Tips & Tricks</h1>
-  <p>Read the page to find out some cool tricks on how to become a haiku champion!</p>
+  <h1>Tips & Tools</h1>
+  <p>Read the page to find out some cool tricks on how to become a haiku champion! Check out our Haiku verification tool as well!</p>
 </div>
 
 <div id="faves" class="page">
@@ -164,6 +180,68 @@ function showPage(pageId) {
 
   document.getElementById(pageId).classList.add("active");
 }
+
+
+function generateTheme() {
+  const themes = [
+    "Rain at midnight",
+    "A lonely streetlight",
+    "Cherry blossoms falling",
+    "The last day of summer",
+    "Snow melting",
+    "A quiet forest",
+    "Ocean waves at dawn",
+    "A broken clock",
+    "Wind through tall grass",
+    "A bubbling brook",
+    "A shining ocean",
+    "A waterfall",
+    "An animal",
+    "A fairy",
+    "A peaceful morning",
+    "Fireflies",
+    "A core memory",
+    "Something only you would understand",
+
+  ];
+   let randomIndex = Math.floor(Math.random() * themes.length);
+
+  document.getElementById("theme-output").textContent = themes[randomIndex];
+}
+
+
+window.onload = function() {
+  const saved = localStorage.getItem("haikuText");
+  if (saved) {
+    document.getElementById("haiku-box").value = saved;
+  }
+};
+document.getElementById("haiku-box").addEventListener("input", function() {
+  localStorage.setItem("haikuText", this.value);
+});
+
+
+
+
+
+
+
+
+
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const box = document.getElementById("haiku-box");
+
+  const saved = localStorage.getItem("haikuText");
+  if (saved) {
+    box.value = saved;
+  }
+
+  box.addEventListener("input", () => {
+    localStorage.setItem("haikuText", box.value);
+  });
+});
 </script>
 </body>
 </html>
