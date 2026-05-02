@@ -2,6 +2,18 @@
 <head>
     <style>
 
+
+#tip input {
+
+  width: 80%;
+  padding: 10px;
+  margin: 10px;67
+  border-radius: 10px;
+  border: none
+  ;
+
+}
+
 .page {
   display: none;
 }
@@ -161,6 +173,17 @@ border-radius: 12px;
 <div id="tip" class="page">
   <h1>Tips & Tools</h1>
   <p>Read the page to find out some cool tricks on how to become a haiku champion! Check out our Haiku verification tool as well!</p>
+
+  <input type="text" id="line1" placeholder="Line 1 (5 syllables)">
+  <p id="count1"></p>
+
+  <input type="text" id="line2" placeholder="Line 2 (7 syllables)">
+  <p id="count2"></p>
+
+  <input type="text" id="line3" placeholder="Line 3 (5 syllables)">
+  <p id="count3"></p>
+
+  <button onclick="checkHaiku()">Check Haiku</button>
 </div>
 
 <div id="faves" class="page">
@@ -301,6 +324,48 @@ window.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("haikuText", box.value);
   });
 });
+
+
+
+
+
+
+function countSyllables(word){
+  word = word.toLowerCase();
+   if (word.length <= 3) return 1;
+
+  let vowels = word.match(/[aeiouy]+/g);
+  let count = vowels ? vowels.length : 0;
+
+  if (word.endsWith("e")) count--;
+  if (count === 0) count = 1;
+
+  return count;
+}
+
+function countLine(line){
+ let words = line.split(" ");
+  let total = 0;
+
+  words.forEach(word => {
+    total += countSyllables(word);
+  });
+  return total;
+}
+
+function checkHaiku(){
+  let l1 = document.getElementById("line1").value;
+  let l2 = document.getElementById("line2").value;
+  let l3 = document.getElementById("line3").value;
+
+    let c1 = countLine(l1);
+let c2 = countLine(l2);
+  let c3 = countLine(l3);
+
+  document.getElementById("count1").textContent = "Syllables: " + c1;
+  document.getElementById("count2").textContent = "Syllables: " + c2;
+  document.getElementById("count3").textContent = "Syllables: " + c3;
+}
 </script>
 </body>
 </html>
