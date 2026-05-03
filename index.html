@@ -166,7 +166,13 @@ border-radius: 12px;
 <div id="write" class="page">
   <h1>Write your own haikus here!</h1>
 
-  <textarea id="haiku-box" placeholder="Write your haikus here..."></textarea>
+  <textarea id="haiku-box" placeholder="Write your haikus here..."rows="6" style="width: 80%;"></textarea>
+  <br><br>
+
+<button onclick="saveHaiku()">Save Haiku</button>
+ 
+<h3>Your Saved Haikus:</h3> 
+<div    id="haikuList"></div>
 </div>
 
 
@@ -249,6 +255,19 @@ Melted in the mist<br>
 </div>
 </div>
 <script>
+   
+
+   const specialWords = {
+      "fire": 1,
+  "hour": 1,
+  "every": 2,
+  "family": 3,
+  "people": 2,
+  "chocolate": 3,
+  "camera": 3,
+  "view": 1,
+  "time": 1
+};
 function showPage(pageId) {
   let pages = document.querySelectorAll(".page");
 
@@ -333,7 +352,7 @@ window.addEventListener("DOMContentLoaded", () => {
 function countSyllables(word){
   word = word.toLowerCase();
    if (word.length <= 3) return 1;
-
+if (specialWords[word]) return  specialWords[word]; 
   let vowels = word.match(/[aeiouy]+/g);
   let count = vowels ? vowels.length : 0;
 
@@ -366,6 +385,38 @@ let c2 = countLine(l2);
   document.getElementById("count2").textContent = "Syllables: " + c2;
   document.getElementById("count3").textContent = "Syllables: " + c3;
 }
+
+
+function saveHaiku() {
+  let text = document.getElementById("haikuInput").value;
+
+  if (text.trim() === "")  return;
+  let haikus = JSON.parse(localStorage.getItem("haikus")) || [];
+  haikus.push(text);
+  localStorage.setItem("haikus",  JSON.stringify(haikus));
+document.getElementById("haikuInput").value = "";
+
+  displayHaikus();
+}
+
+
+function displayHaikus() {
+  let haikus = JSON.parse(localStorage.getItem("haikus")) || [];
+  let container = document.getElementById("haikuList");
+
+container.innerHTML = "";
+haikus.forEach((haiku, index) => {
+  container.innerHTML += `
+<div style="margin:10px; padding:10px; background:rgba(255,255,255,0.6); border-radius:10px;">
+        <pre>${haiku}</pre>
+        <button onclick="deleteHaiku(${index})">Delete</button>
+      </div>
+    `;
+  });
+}
+
+
+
 </script>
 </body>
 </html>
