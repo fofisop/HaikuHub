@@ -21,7 +21,9 @@ body.dark .main-card {
 body.dark .menu-content a {
   color: #f5e9dd;
 }
-
+body.dark .menu-content a:hover {
+  background: rgba(245, 233, 221, 0.1);
+}
 body.dark .sidebar {
   background: rgba(40, 25, 15, 0.9);
   color: white
@@ -150,6 +152,8 @@ border-radius: 12px;
     <p>A haiku is a style of poetry originating in Japan in which there are really only two rules:</p>
     <p>1.There are only three lines</p>
     <p>2.The structure of a haiku is 5-7-5, also known as 5 syllabules for the first and last lines, and seven syllabulles for the second line.</p>
+    <br> <h3>Achievements</h3>
+<div id="achievements"></div>
 </div>
 <div id="inspo" class="page">
   <h1>Inspo Page</h1>
@@ -174,8 +178,6 @@ border-radius: 12px;
 <h3>Your Saved Haikus:</h3> 
 <div    id="haikuList"></div>
 </div>
-
-
 <div id="tip" class="page">
 
   <h1>Tips & Tools</h1>
@@ -218,29 +220,21 @@ border-radius: 12px;
     In the east today.<br>
     - Yosa Buson
   </p>
-
-
   <p>I am lying down<br>
   under my warm futon and
   <br> still the night is cold. <br>
 -Matsuo Bashō</p>
-
-
 <p>
   Ocean waves crash down.
   <br> Salt spray kissed weathered rocks.
   <br> Eternal rythm
    <br>-Jamil Ahmed
 </p>
-
 <p>When I turned my head
 <br> That traveller I just passed<br>
 Melted in the mist<br>
 -Masaoka Shiki
 </p>
-
-
-
 <p>
   Canola flowers<br>
   The moon in the Eastern sky <br>
@@ -258,7 +252,6 @@ Melted in the mist<br>
   <br> -Me!
 </p>
 </div>
-
 <div id="set" class="page">
   <h1>Settings</h1>
   <p>Change them to your liking.</p>
@@ -268,13 +261,11 @@ Melted in the mist<br>
      <button onclick="toggleMusic()" id = "music_btn">Play chill music</button>
      <br>
      <button onclick="document.body.classList.toggle('dark')">
-  Toggle Dark Mode
+  Toggle Dark/Light Mode
 </button>
 </div>
 </div>
 <script>
-   
-
    const specialWords = {
       "fire": 1,
   "hour": 1,
@@ -288,6 +279,12 @@ Melted in the mist<br>
   "you": 1,
   "landscape": 2,
 };
+
+const achievements = [
+  { id: "first", name: "First Haiku", condition: (count) => count >= 1 },
+  { id: "five", name: "5 Haikus!", condition: (count) => count >= 5 },
+  { id: "ten", name: "10 Haikus!", condition: (count) => count >= 10 }
+];
 function showPage(pageId) {
   let pages = document.querySelectorAll(".page");
 
