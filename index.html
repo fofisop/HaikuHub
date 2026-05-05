@@ -1,23 +1,34 @@
 
 <head>
     <style>
-
-
 #tip input {
-
   width: 80%;
   padding: 10px;
-  margin: 10px;67
+  margin: 10px;
   border-radius: 10px;
   border: none
   ;
-
 }
 
+
+.dark{
+  background-image: url(d.png);
+  color: white
+}
+body.dark .main-card {
+ background: rgba(60, 35, 20, 0.4);
+}
+body.dark .menu-content a {
+  color: #f5e9dd;
+}
+
+body.dark .sidebar {
+  background: rgba(40, 25, 15, 0.9);
+  color: white
+}
 .page {
   display: none;
 }
-
 .page.active {
   display: block;
 }
@@ -32,7 +43,6 @@ font-size: 16px;
 resize: none;
 background: rgba(255, 255, 255, 0.8);
 }
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -42,7 +52,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-        
 .sidebar {
   position: fixed;
   left: 0;
@@ -58,7 +67,6 @@ body {
   box-shadow: 4px 0 20px rgba(0,0,0,0.1);
   z-index: 1000;
 }
-
 .sidebar:hover {
   width: 250px;
 }
@@ -67,16 +75,12 @@ body {
     margin: 80px auto;
     padding: 40px;
     border-radius: 25px;
-
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(12px);
-
     border: 2px solid rgba(255,255,255,0.4);
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-
     text-align: center;
 }
-
 .main-card h1 {
     font-size: 42px;
     margin-bottom: 20px;
@@ -98,7 +102,6 @@ body {
     background: rgba(255,255,255,0.8);
     transition: 0.2s;
 }
-
 .main-card button:hover {
     transform: scale(1.05);
 }
@@ -109,7 +112,6 @@ body {
   margin-left: 20px;
   cursor: pointer;
 }
-
 .menu-content a {
   text-decoration: none;
   color: #333;
@@ -118,13 +120,11 @@ body {
   font-size: 16px;
   transition: 0.2s;
 }
-
 .menu-content a:hover {
 background: rgba(255,255,255,0.6);
 border-radius: 12px;
 }
     </style>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haiku</title>
 </head>
@@ -177,8 +177,18 @@ border-radius: 12px;
 
 
 <div id="tip" class="page">
+
   <h1>Tips & Tools</h1>
   <p>Read the page to find out some cool tricks on how to become a haiku champion! Check out our Haiku verification tool as well!</p>
+  <ul>
+    <li>Don't let the rules rule you. If you are making a haiku and the syllable count is off, it could still count as a version of haiku!</li>
+    <li>Describe things in as much detail as you can. Even through haikus are short, it doesn't mean that they should be bland! So make sure to keep all of your senses on point when writing a haiku.</li>
+    <li>Before starting to write your haiku, consider your theme, and jot down about twenty words that relate to your theme. Then go over them again, and string the words together to make a haiku! </li>
+    <li>Haikus don't nessacarily have to make sense. As long as there is emotion, rythym, and your artistic talent, it will work!</li>
+    <li>Read your haiku aloud to check its rythm. Awkward, but it helps!</li>
+  </ul>
+  <p>Use this tool by typing in your haiku line by line, and check if it really follows the 575 rule!</p>
+  <p>Note: This tool makes many mistakes and only seems to work right 70% of the time. Don't put your trust on it fully!</p>
 
   <input type="text" id="line1" placeholder="Line 1 (5 syllables)">
   <p id="count1"></p>
@@ -238,7 +248,7 @@ Melted in the mist<br>
   -Yosa Buson
 </p>
 <p>Haikus are easy.
-  <br> But sometimes they dont make sense.
+  <br> But sometimes they don't make sense.
   <br> Refigerator.
 <br> -Unknown
 </p>
@@ -252,6 +262,14 @@ Melted in the mist<br>
 <div id="set" class="page">
   <h1>Settings</h1>
   <p>Change them to your liking.</p>
+  <audio id = "music" loop>
+    <source src="4856042944593920.wav" type="audio/wav">
+  </audio>
+     <button onclick="toggleMusic()" id = "music_btn">Play chill music</button>
+     <br>
+     <button onclick="document.body.classList.toggle('dark')">
+  Toggle Dark Mode
+</button>
 </div>
 </div>
 <script>
@@ -263,10 +281,12 @@ Melted in the mist<br>
   "every": 2,
   "family": 3,
   "people": 2,
-  "chocolate": 3,
   "camera": 3,
   "view": 1,
-  "time": 1
+  "time": 1,
+   "i": 1,
+  "you": 1,
+  "landscape": 2,
 };
 function showPage(pageId) {
   let pages = document.querySelectorAll(".page");
@@ -303,14 +323,10 @@ function generateTheme() {
     "Your favorite book",
     "A forgotten object",
     "A dark corridoor",
-
   ];
    let randomIndex = Math.floor(Math.random() * themes.length);
-
   document.getElementById("theme-output").textContent = themes[randomIndex];
 }
-
-
 window.onload = function() {
   const saved = localStorage.getItem("haikuText");
   if (saved) {
@@ -319,18 +335,8 @@ window.onload = function() {
 };
 document.getElementById("haiku-box").addEventListener("input", function() {
   localStorage.setItem("haikuText", this.value);
-});
-
-
-
-
-
-
-
-
-
-
-
+}
+)
 window.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("haiku-box");
 
@@ -338,17 +344,10 @@ window.addEventListener("DOMContentLoaded", () => {
   if (saved) {
     box.value = saved;
   }
-
   box.addEventListener("input", () => {
     localStorage.setItem("haikuText", box.value);
   });
 });
-
-
-
-
-
-
 function countSyllables(word){
   word = word.toLowerCase();
    if (word.length <= 3) return 1;
@@ -361,7 +360,6 @@ if (specialWords[word]) return  specialWords[word];
 
   return count;
 }
-
 function countLine(line){
  let words = line.split(" ");
   let total = 0;
@@ -371,52 +369,93 @@ function countLine(line){
   });
   return total;
 }
-
 function checkHaiku(){
   let l1 = document.getElementById("line1").value;
   let l2 = document.getElementById("line2").value;
   let l3 = document.getElementById("line3").value;
-
     let c1 = countLine(l1);
 let c2 = countLine(l2);
   let c3 = countLine(l3);
-
   document.getElementById("count1").textContent = "Syllables: " + c1;
   document.getElementById("count2").textContent = "Syllables: " + c2;
   document.getElementById("count3").textContent = "Syllables: " + c3;
 }
-
-
 function saveHaiku() {
-  let text = document.getElementById("haikuInput").value;
+  let text = document.getElementById("haiku-box").value;
 
   if (text.trim() === "")  return;
   let haikus = JSON.parse(localStorage.getItem("haikus")) || [];
   haikus.push(text);
   localStorage.setItem("haikus",  JSON.stringify(haikus));
-document.getElementById("haikuInput").value = "";
+document.getElementById("haiku-box").value = "";
 
   displayHaikus();
 }
-
-
 function displayHaikus() {
   let haikus = JSON.parse(localStorage.getItem("haikus")) || [];
   let container = document.getElementById("haikuList");
-
 container.innerHTML = "";
 haikus.forEach((haiku, index) => {
   container.innerHTML += `
 <div style="margin:10px; padding:10px; background:rgba(255,255,255,0.6); border-radius:10px;">
         <pre>${haiku}</pre>
-        <button onclick="deleteHaiku(${index})">Delete</button>
+        <button onclick="deleteHaiku(${index})">Remove</button>
+        <button onclick="shareHaiku(\`${haiku}\`)">Share</button>
       </div>
     `;
   });
 }
 
 
+function deleteHaiku(index) {
+  let haikus = JSON.parse(localStorage.getItem("haikus")) || [];
+  haikus.splice(index, 1);
+ localStorage.setItem("haikus", JSON.stringify(haikus)); 
+ displayHaikus();
+}
 
+
+let isPlaying = false;
+
+function toggleMusic() {
+  const music = document.getElementById("music");
+  const btn = document.getElementById("music_btn");
+
+  if (!isPlaying) {
+    music.play();
+    btn.textContent = "Pause Music";
+    isPlaying = true;
+  } else {
+    music.pause();
+    btn.textContent = "Play Music";
+    isPlaying = false;
+  }
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("haikuText");
+  if (saved) {
+    document.getElementById("haiku-box").value = saved;
+  }
+    displayHaikus();
+
+});
+
+
+function shareHaiku(text){
+  const shareText = "Check out my haiku: /n/n" + text;
+  if (navigator.share){
+    navigator.share({
+      title: "My Haiku",
+      text: shareText
+    });
+  }else{
+      navigator.clipboard.writeText(shareText);
+    alert("Haiku copied to clipboard!");
+  }
+
+}
 </script>
 </body>
 </html>
